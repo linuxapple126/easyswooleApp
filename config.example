@@ -1,0 +1,42 @@
+<?php
+/**
+ * mysql配置
+ * @author qap <qiuapeng921@163.com>
+ * @license http://wiki.com/index.php
+ * @link http://127.0.0.1:8000/index
+ * @Date 2019/4/18 13:25
+ */
+
+return [
+    "MYSQL" => [
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'user' => 'root',
+        'timeout' => '5',
+        'charset' => 'utf8mb4',
+        'password' => '123456',
+        'database' => 'rd029',
+        'POOL_MAX_NUM' => '50',
+        'POOL_MIN_NUM' => '1',
+        'POOL_TIME_OUT' => '0.1',
+    ],
+    "REDIS" => [
+        'host' => '127.0.0.1',
+        'port' => '6379',
+        'auth' => '',
+        'POOL_MAX_NUM' => '20',
+        'POOL_MIN_NUM' => '1',
+        'POOL_TIME_OUT' => '0.1',
+    ],
+    "RABBIT" => [
+        'host' => '127.0.0.1',
+        'port' => '5672',
+        'user' => 'admin',
+        'password' => '123456',
+        'vhost' => '/'
+    ],
+    "ELASTIC" => "elasticsearch:9200",
+    "AliYun" => [
+        'Web_Hook' => 'https://oapi.dingtalk.com/robot/send?access_token=9c13c48eb59aba7013eeda428d90dd45ecbf51f1e6472fd29816c7f5f23c84b0',
+    ]
+];
