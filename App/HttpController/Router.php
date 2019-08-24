@@ -23,8 +23,8 @@ class Router extends AbstractRouter
         $route->get('/', '/Index/index');
         // 开启全局路由(只有定义的地址才可以访问)
         $this->setGlobalMode(true);
-        // 水吧路由
-        $route->addGroup('/juice', function (RouteCollector $route) {
+        // 后台路由
+        $route->addGroup('/admin', function (RouteCollector $route) {
             AdminRoute::getInstance()->setRoute($route);
         });
 
