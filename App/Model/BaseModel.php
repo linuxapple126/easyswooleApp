@@ -3,8 +3,13 @@
 namespace App\Model;
 
 use App\Traits\MysqlTrait;
-use App\Traits\RedisTrait;
-use App\Traits\ResponseTrait;
+use App\Utility\Pool\MysqlObject;
+use App\Utility\Pool\MysqlPool;
+use EasySwoole\Component\Context\Exception\ModifyError;
+use EasySwoole\Component\Pool\Exception\PoolEmpty;
+use EasySwoole\Component\Pool\Exception\PoolException;
+use EasySwoole\EasySwoole\Config;
+use Throwable;
 
 /**
  * Class BaseModel
@@ -12,13 +17,54 @@ use App\Traits\ResponseTrait;
  */
 class BaseModel
 {
-    use MysqlTrait, RedisTrait, ResponseTrait;
+    use MysqlTrait;
 
     /**
-     * @throws \Throwable
+     * @var MysqlObject
+     */
+    protected $mysql;
+
+    /**
+     * BaseModel constructor.
+     * @param null $mysqlObject mysql对象
+     * @throws ModifyError
+     * @throws PoolEmpty
+     * @throws PoolException
+     * @throws Throwable
+     */
+    public function __construct($mysqlObject = null)
+    {
+        if ($mysqlObject) {
+            $this->mysql = $mysqlObject;
+        } else {
+            $this->mysql = $this->getMysql();
+        }
+    }
+
+    /**
+     * @param MysqlPool|null $mysqlPool
+     * @return MysqlObject
+     * @throws ModifyError
+     * @throws PoolEmpty
+     * @throws PoolException
+     * @throws Throwable
+     */
+    public function mysql($mysqlPool = null)
+    {
+        if ($mysqlPool) {
+            return $this->getMysql($mysqlPool);
+        } else {
+            return $this->mysql;
+        }
+    }
+
+    /**
+     * @throws Throwable
      */
     public function __destruct()
     {
-        print_r($this->getMysql()->getLastQuery() . PHP_EOL);
+        if (Config::getInstance()->getConf('DEBUG')) {
+            echo $this->mysql->getLastQuery() . PHP_EOL;
+        }
     }
 }

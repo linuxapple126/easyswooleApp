@@ -10,7 +10,11 @@
     "ext-curl": "*",
     "easyswoole/http-client": "^1.3",
     "php-amqplib/php-amqplib": "^2.9",
-    "elasticsearch/elasticsearch": "^7.1"
+    "elasticsearch/elasticsearch": "^7.1",
+    "easyswoole/template": "^1.0",
+    "duncan3dc/blade": "^4.5",
+    "ext-libxml": "*",
+    "ext-simplexml": "*"
   },
   "autoload": {
     "files": [

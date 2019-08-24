@@ -14,6 +14,7 @@ use App\Middleware\TokenMiddleware;
 use App\Process\HotReload;
 use App\Process\Queue;
 use App\Utility\Pool\MysqlPool;
+use App\Utility\Pool\MysqlPoolSlave;
 use App\Utility\Pool\RedisPool;
 use EasySwoole\Component\Di;
 use EasySwoole\Http\Request;
@@ -48,6 +49,8 @@ class EasySwooleEvent implements Event
                 //每个worker进程都预创建连接
                 PoolManager::getInstance()->getPool(MysqlPool::class)->preLoad(Config::getInstance()->getConf('MYSQL.POOL_MAX_NUM'));//最小创建数量
                 PoolManager::getInstance()->getPool(RedisPool::class)->preLoad(Config::getInstance()->getConf('REDIS.POOL_MAX_NUM'));//最小创建数量
+
+                PoolManager::getInstance()->getPool(MysqlPoolSlave::class)->preLoad(Config::getInstance()->getConf('MYSQL.POOL_MAX_NUM'));//最小创建数量
             }
         });
 
@@ -79,12 +82,6 @@ class EasySwooleEvent implements Event
     /**
      * 加载自定义配置
      * @param $ConfPath
-     *
-     * @return void
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/30 17:07
-     *
      */
     public static function loadConf($ConfPath)
     {

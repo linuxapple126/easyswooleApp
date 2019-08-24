@@ -1,19 +1,15 @@
 <?php
 
+use App\Utility\Logger;
 use EasySwoole\Component\Context\ContextManager;
 use EasySwoole\Component\Context\Exception\ModifyError;
 use EasySwoole\Component\Di;
-use EasySwoole\EasySwoole\Logger;
+use EasySwoole\EasySwoole\Config;
 use EasySwoole\Http\Message\Request;
 
 if (!function_exists('dd')) {
     /**
      * @param $data
-     *
-     * @return void
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/22 9:01
      */
     function dd($data)
     {
@@ -26,13 +22,9 @@ if (!function_exists('dd')) {
 if (!function_exists('array_map_recursive')) {
     /**
      * 输入数据过滤
-     *
      * @param $filter
      * @param $data
      * @return array
-     *
-     * @author  邱阿朋 <apqiu@suntekcorps.com>
-     * @date    2019/4/18 23:17
      */
     function array_map_recursive($filter, $data)
     {
@@ -67,11 +59,7 @@ if (!function_exists('object_array')) {
     /**
      * 对象转数组
      * @param $array
-     *
      * @return array
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/18 17:48
      */
     function object_array($array)
     {
@@ -92,11 +80,7 @@ if (!function_exists('array_object')) {
     /**
      * 数组转对象
      * @param $array
-     *
      * @return StdClass
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/18 17:50
      */
     function array_object($array)
     {
@@ -117,12 +101,7 @@ if (!function_exists('set_context')) {
      * @param $key
      * @param $value
      * @param int $cid
-     *
-     * @return void
-     *
      * @throws ModifyError
-     * @author qap <qiuapeng921@163.com>
-     * @date 19-4-28 上午9:16
      */
     function set_context($key, $value, $cid = 1)
     {
@@ -132,14 +111,10 @@ if (!function_exists('set_context')) {
 
 if (!function_exists('get_context')) {
     /**
-     *获取上下文
-     *
+     * 获取上下文
      * @param $key
      * @param int $cid
-     * @return null
-     *
-     * @author  邱阿朋 <apqiu@suntekcorps.com>
-     * @date    2019/4/18 23:17
+     * @return mixed|null
      */
     function get_context($key, $cid = 1)
     {
@@ -150,22 +125,9 @@ if (!function_exists('get_context')) {
 
 if (!function_exists('del_context')) {
 
-    /*
-     * 删除上下文
-     *
-     * @param int $cid
-     * @return void
-     *
-     * @author  邱阿朋 <apqiu@suntekcorps.com>
-     * @date    2019/4/18 23:17
-     */
     /**
+     * 删除上下文
      * @param int $cid
-     *
-     * @return void
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/22 8:50
      */
     function del_context($cid = 1)
     {
@@ -177,11 +139,6 @@ if (!function_exists('recordLog')) {
     /**
      * 日志记录
      * @param $content
-     *
-     * @return void
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/22 8:50
      */
     function recordLog($content)
     {
@@ -190,9 +147,13 @@ if (!function_exists('recordLog')) {
 }
 
 if (!function_exists('pay_log')) {
+    /**
+     * 支付日志
+     * @param $message
+     */
     function pay_log($message)
     {
-        \App\Utility\Logger::getInstance()->log($message, 1, 'DEBUG');
+        Logger::getInstance()->log($message, 1, 'DEBUG');
     }
 }
 
@@ -200,9 +161,6 @@ if (!function_exists('getUrlPath')) {
     /**
      * 获取请求地址
      * @return string
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/24 9:47
      */
     function getUrlPath()
     {
@@ -215,13 +173,8 @@ if (!function_exists('arrayToTree')) {
     /**
      * 将数据格式转换成树形结构数组
      * @param $array
-     *
      * @return array
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 19-4-28 上午11:38
      */
-
     function arrayToTree($array)
     {
         //第一步 构造数据
@@ -247,11 +200,7 @@ if (!function_exists('arraySort')) {
      * @param array $array 要排序的数组
      * @param string $keys 要排序的键字段
      * @param int $sort 排序类型  SORT_ASC     SORT_DESC
-     *
      * @return mixed
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 19-4-29 上午11:49
      */
     function arraySort($array, $keys, $sort = SORT_DESC)
     {
@@ -268,11 +217,7 @@ if (!function_exists('xmlToArray')) {
     /**
      * xml转array
      * @param $xml
-     *
      * @return mixed
-     *
-     * @author qap <qiuapeng921@163.com>
-     * @date 2019/4/4 14:53
      */
     function xmlToArray($xml)
     {
@@ -301,5 +246,17 @@ if (!function_exists('arrayToXml')) {
         }
         $xml .= "</xml>";
         return $xml;
+    }
+}
+
+if (!function_exists('asset')) {
+    /**
+     * 转发静态文件
+     * @param string $path
+     * @return string
+     */
+    function asset($path = '')
+    {
+        return Config::getInstance()->getConf('document_root') . '/' . $path;
     }
 }

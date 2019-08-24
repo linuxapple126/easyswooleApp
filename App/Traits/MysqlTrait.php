@@ -2,10 +2,7 @@
 /**
  * Mysql工具类
  * @category Category
- * @package Package
  * @author qap <qiuapeng921@163.com>
- * @license http://wiki.com/index.php
- * @link http://127.0.0.1:8000/index
  * @Date 19-5-17 下午4:20
  */
 
@@ -46,7 +43,7 @@ trait MysqlTrait
         }
         $pool = PoolManager::getInstance()->getPool($this->mysqlPool);
         if ($pool instanceof AbstractPool) {
-            $obj = $pool->getObj(Config::getInstance()->getConf('Mysql.POOL_TIME_OUT'));
+            $obj = $pool->getObj(Config::getInstance()->getConf('MYSQL.POOL_TIME_OUT'));
             if ($obj) {
                 Coroutine::defer(function () use ($pool, $obj) {
                     $pool->recycleObj($obj);

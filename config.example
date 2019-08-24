@@ -1,10 +1,6 @@
 <?php
 /**
- * mysql配置
- * @author qap <qiuapeng921@163.com>
- * @license http://wiki.com/index.php
- * @link http://127.0.0.1:8000/index
- * @Date 2019/4/18 13:25
+ * 基础配置
  */
 
 return [
@@ -15,6 +11,18 @@ return [
         'timeout' => '5',
         'charset' => 'utf8mb4',
         'password' => '123456',
+        'database' => 'rd029',
+        'POOL_MAX_NUM' => '50',
+        'POOL_MIN_NUM' => '1',
+        'POOL_TIME_OUT' => '0.1',
+    ],
+    "MYSQL-SlAVE" => [
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'user' => 'rd029',
+        'timeout' => '5',
+        'charset' => 'utf8mb4',
+        'password' => 'reading029',
         'database' => 'rd029',
         'POOL_MAX_NUM' => '50',
         'POOL_MIN_NUM' => '1',
@@ -38,5 +46,9 @@ return [
     "ELASTIC" => "elasticsearch:9200",
     "AliYun" => [
         'Web_Hook' => 'https://oapi.dingtalk.com/robot/send?access_token=9c13c48eb59aba7013eeda428d90dd45ecbf51f1e6472fd29816c7f5f23c84b0',
-    ]
+    ],
+     'ORIGIN' => [
+        'http://localhost:8080',
+        'http://bar.rd029.com',
+     ]
 ];

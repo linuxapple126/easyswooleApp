@@ -2,7 +2,7 @@
 
 namespace App\HttpController;
 
-use App\Router\JuiceRoute;
+use App\Router\AdminRoute;
 use EasySwoole\Http\AbstractInterface\AbstractRouter;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
@@ -25,7 +25,7 @@ class Router extends AbstractRouter
         $this->setGlobalMode(true);
         // 水吧路由
         $route->addGroup('/juice', function (RouteCollector $route) {
-            JuiceRoute::getInstance()->setRoute($route);
+            AdminRoute::getInstance()->setRoute($route);
         });
 
         // 空方法

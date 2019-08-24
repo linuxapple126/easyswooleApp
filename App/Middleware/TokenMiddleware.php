@@ -25,7 +25,7 @@ class TokenMiddleware
      */
     private $except = [
         '/',
-        '/juice/auth/login'
+        '/admin/auth/login'
     ];
 
     /**

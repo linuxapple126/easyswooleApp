@@ -35,5 +35,7 @@ return [
     'DISPLAY_ERROR' => true,
     'PHAR' => [
         'EXCLUDE' => ['.idea', 'Log', 'Temp', 'easyswoole', 'easyswoole.install']
-    ]
+    ],
+    'APP_HOST' => "http://dev.phpswoole.com",
+    'DEBUG' => true
 ];

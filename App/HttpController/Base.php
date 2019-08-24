@@ -5,6 +5,8 @@ namespace App\HttpController;
 use App\Constants\ErrorConst;
 use App\Traits\RedisTrait;
 use App\Traits\ResponseTrait;
+use App\Utility\Blade;
+use EasySwoole\EasySwoole\ServerManager;
 use EasySwoole\Http\AbstractInterface\Controller;
 use EasySwoole\Http\Message\Status;
 
@@ -16,9 +18,6 @@ abstract class Base extends Controller
 {
     use RedisTrait, ResponseTrait;
 
-    /**
-     *
-     */
     public function index()
     {
         $this->response()->write('hello');
@@ -37,6 +36,25 @@ abstract class Base extends Controller
             $this->response()->write(json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             $this->response()->withHeader('Content-type', 'application/json;charset=utf-8');
             $this->response()->withStatus(Status::CODE_OK);
+            $this->response()->end();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 模板渲染
+     * @param $template
+     * @param array $data
+     * @return string|null
+     */
+    public function view($template, $data = [])
+    {
+        if (!$this->response()->isEndResponse()) {
+            $viewsDir = EASYSWOOLE_ROOT . '/App/Views';
+            $cacheDir = EASYSWOOLE_ROOT . '/Runtime/Cache';
+            $templateData = (new Blade($viewsDir, $cacheDir))->render($template, $data);
+            $this->response()->write($templateData);
             $this->response()->end();
             return true;
         }
@@ -78,6 +96,17 @@ abstract class Base extends Controller
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取客户端ip
+     * @return mixed
+     */
+    public function getIp()
+    {
+        $fd = $this->request()->getSwooleRequest()->fd;
+        $ip = ServerManager::getInstance()->getSwooleServer()->connection_info($fd);
+        return $ip['remote_ip'];
     }
 
     /**
