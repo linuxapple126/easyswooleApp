@@ -1,7 +1,7 @@
 {
   "require": {
     "php": ">=7.1.0",
-    "easyswoole/easyswoole": "3.x-dev",
+    "easyswoole/easyswoole": "3.2.x",
     "easyswoole/mysqli": "^1.0",
     "jormin/dingtalk": "^1.0",
     "firebase/php-jwt": "^5.0",
