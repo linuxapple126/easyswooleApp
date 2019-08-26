@@ -15,7 +15,7 @@ class RoleModel extends BaseModel
      * 管理员角色表
      * @var string
      */
-    private static $table = 'role';
+    private static $table = 'rd_admin_role';
 
     /**
      * @param $role_id

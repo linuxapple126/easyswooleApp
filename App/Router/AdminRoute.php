@@ -17,8 +17,9 @@ class AdminRoute
 
     public function setRoute(RouteCollector $route)
     {
+        $route->get('index', '/Admin/Index/index');
         //登录退出
-        $route->post('/auth/login', '/Admin/Auth/login');
-        $route->post('/auth/logout', '/Admin/Auth/logout');
+        $route->addRoute(['GET', 'POST'], 'auth/login', '/Admin/Auth/login');
+        $route->addRoute(['GET', 'POST'], 'auth/logout', '/Admin/Auth/logout');
     }
 }

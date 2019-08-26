@@ -15,7 +15,7 @@ class AdminModel extends BaseModel
      * 管理员表
      * @var string
      */
-    private static $table = 'admin';
+    private static $table = 'rd_admin';
 
     /**
      * @param $username

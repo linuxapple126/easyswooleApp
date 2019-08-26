@@ -24,7 +24,7 @@ class Router extends AbstractRouter
         // 开启全局路由(只有定义的地址才可以访问)
         $this->setGlobalMode(true);
         // 后台路由
-        $route->addGroup('/admin', function (RouteCollector $route) {
+        $route->addGroup('/admin/', function (RouteCollector $route) {
             AdminRoute::getInstance()->setRoute($route);
         });
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\HttpController\Juice;
+namespace App\HttpController\Admin;
 
 use App\HttpController\Base;
-use App\Service\Common\AdminService;
+use App\Service\AdminService;
 use Throwable;
 
 class Auth extends Base
@@ -14,9 +14,12 @@ class Auth extends Base
      */
     public function login()
     {
-        $request = $this->request()->getParsedBody();
-        $response = (new AdminService())->handleLogin($request);
-        $this->responseJson($response);
+        if ($this->isPost()) {
+            $request = $this->request()->getParsedBody();
+            $response = (new AdminService())->handleLogin($request);
+            $this->responseJson($response);
+        }
+        return $this->view('admin.auth.login');
     }
 
     /**

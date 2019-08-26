@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Service\Common;
+namespace App\Service;
 
 use App\Constants\ErrorConst;
 use App\Model\AdminModel;
 use App\Model\RoleModel;
-use App\Service\BaseService;
 use App\Utility\JWT;
 use Throwable;
 
